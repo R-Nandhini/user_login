@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
-//const router = require("./app/routers/route")
+const router = require("./app/routers/route")
 
 app.use(express.json());
 let port = process.env.PORT || 4000;
@@ -15,7 +15,7 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-//app.use("/api",router);
+app.use("/api",router);
 
 
 // method - get
