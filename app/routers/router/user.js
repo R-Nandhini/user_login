@@ -1,11 +1,13 @@
 var express = require("express");
 var router = express.Router();
 const { check, validationResult } = require("express-validator");
+
+
 var userController = require("../../controller/usercontroller");
 
 //post method
 //this fn user for create user
-//http://localhost:4000/api/user/create
+// --- > http://localhost:4000/api/user/create
 router.post("/create", userController.createUser);
 
 //post method

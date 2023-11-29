@@ -35,7 +35,7 @@ module.exports.insertData = async function (req, res) {
   const userId = uuidv4();
   const { name, password, email, userType } = req.body;
 
-  const findUserByEmailQuery = `select * from users where email='${email}'`;
+  const findUserByEmailQuery = `select * from users2 where email='${email}'`;
 
   try {
     let user = await pool.query(findUserByEmailQuery);
@@ -50,7 +50,7 @@ module.exports.insertData = async function (req, res) {
 
     let hashedPassword = await bcrypt.hash(password, salt);
 
-    const createUserQuery = `insert into users values('${userId}','${name}','${email}','${hashedPassword}','${userType}')`;
+    const createUserQuery = `insert into users2 values('${userId}','${name}','${email}','${hashedPassword}','${userType}')`;
 
    const resp = await pool.query(createUserQuery);
     const payload = {
