@@ -18,11 +18,12 @@ router.post("/login",
         "Please enter a password with 6 or more characters"
     ).isLength({ min: 6 }), authController.loginUser);
 
-    //get method
+//get method
 //this fn used for login
 //http://localhost:4000/api/auth/verify
 
 router.get("/verify", auth, authController.verifyUser);
+router.get("/refresh", auth, authController.verifyUser);
 
 module.exports = router;
 

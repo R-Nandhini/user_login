@@ -37,16 +37,11 @@ module.exports.loginUser = async function (req, res) {
       }
     }
 
-    var token = jwt.sign(
-      {
-        exp: Math.floor(Date.now() / 1000) + 60 * 60,
-        data: payload
-      },
-      "jwtSecret123"
-    );
+    var accesstoken = jwt.sign ( payload , "jwtSecret123", { expiresIn: '1h' });
+    var refreshtoken = jwt.sign( payload, "jwtSecret123", { expiresIn: '1d' });
 
-    if (token) {
-      res.status(200).json({ token, payload });
+    if (accesstoken) {
+      res.status(200).json({ accesstoken, refreshtoken });
     }
 
 
@@ -61,13 +56,14 @@ module.exports.loginUser = async function (req, res) {
 
 module.exports.verifyUser = async function (req, res) {
 
-  console.log(JSON.stringify(req.user));
+  console.log("verfication user ");
 
-  const findUserByEmailQuery = `select email,name,userid,usertype from users2 where userid='${req.user.id}'`;
-  let user = await pool.query(findUserByEmailQuery);
+  // const findUserByEmailQuery = `select email,name,userid,usertype from users2 where userid='${req.user.id}'`;
+  // let user = await pool.query(findUserByEmailQuery);
 
 
-  res.send({ user:user.rows[0] })
+  // res.send({ user:user.rows[0] })
+  res.send("check")
 
 }
 
